@@ -14,7 +14,7 @@ This repo serves as documentation for a two-site corporate network environment I
 The design followed a layered, least-privilege approach.Starting at the access layer, switches enforce host-based security through the implemenation of port security, DHCP Snooping and DAI. On the Distribution layer, VLAN Gateways and HSRPv2 Gateway redundancy provide no single point of error for outbound traffic. Switches on the Core layer provide a routed backbone acting strictly as Layer 3 switches. All devices have access to the DMZ (Server Network) linked to R1 at the headquarters branch.
 ## Topology
 
-<img width="1887" height="718" alt="Screenshot 2026-09-15 015703" src="https://github.com/user-attachments/assets/cc9bc568-2c92-46cf-981c-b7d8c98fb133" />
+<img width="1889" height="720" alt="Screenshot 2026-09-15 020133" src="https://github.com/user-attachments/assets/5a52e4df-0b83-4dca-bad5-a29c91ad271a" />
 
 ## Services & Features
   -**IPSEC over GRETunnel**
