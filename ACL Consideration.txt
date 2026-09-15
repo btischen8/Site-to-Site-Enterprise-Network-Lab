@@ -1,0 +1,17 @@
+ACL Consideration
+Users → Servers       ALLOW required services
+Users → Management    DENY
+
+
+ACLS:
+1. Server Network — permit only necessary service traffic
+
+Where it's enforced: outbound on R1's G0/2.50 (the server VLAN's only path in or out) — one enforcement point covers traffic from both HQ and Branch, since both reach VLAN 50 the same way once routed.
+Each line maps to exactly one server's actual job: DHCP (67), DNS (53 both UDP and TCP), NTP (123), Syslog (514), HTTP (80). Nothing else gets through.
+
+2. Management Subnet — only Management can reach Management
+
+VLAN 30 (HQ Management) and VLAN 70 (Branch Management) should only accept traffic sourced from either management subnet — Engineering, Finance, Wireless, Voice, and Operations should all be blocked from reaching Management devices, while HQ Management and Branch Management can still talk to each other.
+Where it's enforced: outbound on the VLAN 30 SVI (both DSW-HQ1 and DSW-HQ2) and the VLAN 70 SVI (both DSW-B1 and DSW-B2) — essentially the choke point every non-local subnet's traffic has to pass through to reach Management.
+permit serv network UDP ports 67/68/53/123: allow DHCP/DNS/NTP replies from the Server Network (10.1.50.0/24) so the VLAN keeps functioning, without opening it up generally.
+cross-site lines - (permit ip 10.2.70.0 ... 10.1.30.0 ... and its mirror)
